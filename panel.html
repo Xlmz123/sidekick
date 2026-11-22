@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sidekick</title>
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <header id="top">
+    <div id="pageInfo" title="">
+      <img id="favicon" alt="">
+      <div id="pageText">
+        <div id="pageTitle">Sidekick</div>
+        <div id="pageSub">Reading the page you're on</div>
+      </div>
+    </div>
+    <div id="topButtons">
+      <button id="newChat" class="icon" title="New chat">+</button>
+      <button id="openSettings" class="icon" title="Settings">⚙</button>
+    </div>
+  </header>
+
+  <main id="chat">
+    <section id="welcome">
+      <h2>Ask about this page</h2>
+      <p>Sidekick reads the page you're on each time you ask: what you've highlighted, what's on screen, and the rest of the page.</p>
+      <div id="setupCard" class="card" hidden>
+        <strong>One-time setup</strong>
+        <p>Add a free Gemini key (and a Groq key as backup) in <a href="#" id="setupLink">Settings</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="composer">
+    <div id="chips">
+      <button class="chip" data-q="Summarize this page in a few bullet points.">Summarize</button>
+      <button class="chip" data-q="What are the key points I need to know from this page?">Key points</button>
+      <button class="chip" data-q="Explain this page simply, like I'm new to the topic.">Explain simply</button>
+      <button class="chip" data-q="Quiz me with 5 short questions on this page, one at a time. Wait for my answer before the next one.">Quiz me</button>
+    </div>
+    <div id="inputRow">
+      <textarea id="input" rows="1" placeholder="Ask anything about this page…"></textarea>
+      <button id="shot" class="icon toggle" title="Also send a screenshot of what's on screen (Gemini only)">📷</button>
+      <button id="send" class="primary" title="Send (Enter)">↑</button>
+      <button id="stop" class="primary" title="Stop" hidden>■</button>
+    </div>
+    <div id="status"><label><input type="checkbox" id="usePage" checked> Read this page</label><span id="usage"></span></div>
+  </footer>
+
+  <section id="settings" hidden>
+    <header class="sheetHead"><h2>Settings</h2><button id="closeSettings" class="icon" title="Close">✕</button></header>
+    <div class="sheetBody">
+      <div class="field">
+        <label for="geminiKey">Gemini API key <span class="hint">(main)</span></label>
+        <input id="geminiKey" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your key">
+        <div class="hint">Free at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a></div>
+        <label for="geminiModel" class="sub">Model</label>
+        <select id="geminiModel"></select>
+      </div>
+      <div class="field">
+        <label for="groqKey">Groq API key <span class="hint">(backup)</span></label>
+        <input id="groqKey" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your key">
+        <div class="hint">Free at <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a></div>
+        <label for="groqModel" class="sub">Model</label>
+        <select id="groqModel"></select>
+      </div>
+      <div class="row">
+        <button id="testKeys" class="secondary">Check keys &amp; load models</button>
+        <span id="testResult" class="hint"></span>
+      </div>
+      <div class="field">
+        <label for="privateSites">Private sites <span class="hint">(these only use Groq, which doesn't train on what you send)</span></label>
+        <textarea id="privateSites" rows="3" spellcheck="false"></textarea>
+        <div class="hint">One per line or comma-separated. A word like <code>bank</code> matches any site with it in the address.</div>
+      </div>
+      <div class="field">
+        <label><input type="checkbox" id="preferGroq"> Use Groq first (faster, but can't see screenshots)</label>
+      </div>
+      <div class="field">
+        <label for="extraInstr">Extra instructions <span class="hint">(optional)</span></label>
+        <textarea id="extraInstr" rows="2" placeholder="e.g. I'm a high school senior. Keep answers short."></textarea>
+      </div>
+      <div class="row">
+        <button id="saveSettings" class="primary wide">Save</button>
+      </div>
+      <p class="hint">Keys are saved only in this browser. Shortcut: Alt+J (change it at <code>brave://extensions/shortcuts</code>).</p>
+    </div>
+  </section>
+
+  <script src="md.js"></script>
+  <script src="reader.js"></script>
+  <script src="panel.js"></script>
+</body>
+</html>
